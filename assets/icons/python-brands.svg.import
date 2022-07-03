@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/python-brands.svg-15abdb9132161582aef6000e4bff757b.image"
+
+[deps]
+
+source_file="res://assets/icons/python-brands.svg"
+dest_files=[ "res://.import/python-brands.svg-15abdb9132161582aef6000e4bff757b.image" ]
+
+[params]
+
