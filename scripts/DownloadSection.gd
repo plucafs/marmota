@@ -19,7 +19,7 @@ func download_video():
 #		Don't insert a space (" ") before the -x
 		format = "-x" 
 		
-	$DownloadSection/OtherPar/CompleteCommand.text = str(yt_dl_path) + link + format
+	$DownloadSection/OtherPar/CompleteCommand.text = str(yt_dl_path) + format + download_directory + link
 	
 	if $DownloadSection/ytdlpPath/ytdlpPathLineEdit.text == "":
 		$DownloadSection/OtherPar/Debug.text = "Select the correct path to yt-dlp.exe"
