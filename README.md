@@ -26,6 +26,7 @@ It supports single video and playlist.
 What's next?
 - Choose a specific format (currently avaible only webm and opus, usually)
 - Choose a custom name for the file
+- User custom arguments
 - Feel free to propose something!
 
 Credits
