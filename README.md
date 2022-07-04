@@ -1,3 +1,5 @@
+![marmota_icon](/assets/icons/icon.png) 
+
 # marmota
 Friendly yt-dlp GUI, made in Godot
 
