@@ -37,7 +37,7 @@ Credits
 -
 Made with Godot Engine
 
-Plugin [NativeDialogs](https://github.com/98teg/NativeDialogs) to select file and folder using the system file selector, made by 98teg
+Plugin [NativeDialogs](https://github.com/98teg/NativeDialogs) to select file and folder using the system file selector, made by [98teg](https://github.com/98teg)
 
 Icon: python, paste and folder select from [FontAwesome](https://fontawesome.com/) 
 
