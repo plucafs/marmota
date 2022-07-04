@@ -13,6 +13,7 @@ So, I started developing my tool having in mind the simplest yet useful possibil
 How it works?
 -
 Skip to point 4 if you downloaded a release file.
+
 0. Download [yt-dlp](https://github.com/yt-dlp/yt-dlp/releases/)
 1. Install [FFmpeg](https://github.com/yt-dlp/yt-dlp#dependencies)
 2. Download [Godot](https://godotengine.org/download)
