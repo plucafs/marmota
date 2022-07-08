@@ -19,6 +19,7 @@ margin_bottom = -91.0
 color = Color( 0.15, 0.15, 0.15, 1 )
 
 [node name="MenuBar" parent="." instance=ExtResource( 1 )]
+visible = false
 
 [node name="TabContainer" type="TabContainer" parent="."]
 anchor_right = 1.0
