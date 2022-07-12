@@ -3,6 +3,10 @@ extends Control
 onready var format_selector = get_node("DownloadSection/OtherPar/FormatSelector")
 onready var audio_format_selector = get_node("DownloadSection/OtherPar/AudioFormatSelector")
 
+func _process(_delta):
+	if "youtu" in OS.clipboard:
+		$DownloadSection/VideoLinkContainer/VideoLinkLineEdit.text = OS.clipboard
+
 func _ready():
 	format_selector.add_item("Video + audio")
 	format_selector.add_item("Audio only")
