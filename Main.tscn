@@ -1,14 +1,12 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://scenes/MenuBar.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Settings.tscn" type="PackedScene" id=1]
 [ext_resource path="res://themes/theme.tres" type="Theme" id=2]
 [ext_resource path="res://scenes/DownloadSection.tscn" type="PackedScene" id=3]
 
-[node name="Main" type="Control"]
+[node name="Main" type="Control" groups=["main"]]
 anchor_right = 1.0
 anchor_bottom = 1.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
 theme = ExtResource( 2 )
 
 [node name="Background" type="ColorRect" parent="."]
@@ -17,27 +15,15 @@ anchor_bottom = 1.0
 margin_bottom = -91.0
 color = Color( 0.15, 0.15, 0.15, 1 )
 
-[node name="MenuBar" parent="." instance=ExtResource( 1 )]
-visible = false
-
 [node name="TabContainer" type="TabContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 30.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 tab_align = 0
 
-[node name="Download" type="Tabs" parent="TabContainer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 39.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-drag_to_rearrange_enabled = true
+[node name="DownloadSection" parent="TabContainer" instance=ExtResource( 3 )]
+margin_top = 29.0
 
-[node name="DownloadSection" parent="TabContainer/Download" instance=ExtResource( 3 )]
-margin_left = 31.0
-margin_top = 1.0
-margin_right = -31.0
-margin_bottom = -1.0
+[node name="Settings" parent="TabContainer" instance=ExtResource( 1 )]
+visible = false

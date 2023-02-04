@@ -1,15 +1,35 @@
 extends Control
 
-onready var format_selector = get_node("DownloadSection/OtherPar/FormatSelector")
-onready var audio_format_selector = get_node("DownloadSection/OtherPar/AudioFormatSelector")
+#To do: 
+#history of links/directories
+#add more yt-dlp commands
 
-func _process(_delta):
-	if "youtu" in OS.clipboard:
-		$DownloadSection/VideoLinkContainer/VideoLinkLineEdit.text = OS.clipboard
+#Process to save configs:
+#Create value in the Data singleton
+#Add value to save_config()
+#Add value to load_config()
+#Set the value when an event occurs
+#Load the value at startup
+
+onready var format_selector = get_node("%FormatSelector")
+onready var audio_format_selector = get_node("%AudioFormatSelector")
+onready var url = get_node("%LinkText")
+onready var directory = get_node("%DirectoryText")
+onready var debug = get_node("%Debug")
+
+var format = ""
+var audio_format = ""
 
 func _ready():
+#	name = "KEY_DOWNLOAD_SECTION"
+	if load_config():
+		save_config()
+		
+#	url.text = "https://www.youtube.com/watch?v=1s84rIhPuhk"
+#	directory.text = "/home/user/Video/"
+	
 	format_selector.add_item("Video + audio")
-	format_selector.add_item("Audio only")
+	format_selector.add_item("KEY_AUDIO")
 	audio_format_selector.add_item("aac")
 	audio_format_selector.add_item("flac")
 	audio_format_selector.add_item("mp3")
@@ -19,19 +39,40 @@ func _ready():
 	audio_format_selector.add_item("wav")
 	audio_format_selector.add_item("alac")
 	
+	format_selector.selected = Data.extract_audio
+	audio_format_selector.selected = Data.audio_format_selector
+
+func _process(_delta):
+	if "youtu" in OS.clipboard:
+		url.text = OS.clipboard
+
+func save_config():
+	var config = ConfigFile.new()
+	# Section, key, value
+	config.set_value("settings", "directory", Data.directory)
+	config.set_value("settings", "extract_audio", Data.extract_audio)
+	config.set_value("settings", "audio_format_selector", Data.audio_format_selector)
+	config.set_value("settings", "locale", Data.locale)
+	config.save("user://config.cfg")
+
+func load_config():
+	var config = ConfigFile.new()
+	var err = config.load("user://config.cfg")
+	if err != OK:
+		return true
+	for section in config.get_sections():
+		directory.text = config.get_value(section, "directory")
+		Data.extract_audio = config.get_value(section, "extract_audio")
+		Data.audio_format_selector = config.get_value(section, "audio_format_selector")
+		Data.locale = config.get_value(section, "locale")
+		
 func download_video():
-	var yt_dl_path = Global.yt_dl_dir + " "
-	var format = ""
-	var audio_format = ""
-	var download_directory = "-P " + $DownloadSection/DownloadPathContainer/DownloadPathLineEdit.get_text() + " "
-	var link = $DownloadSection/VideoLinkContainer/VideoLinkLineEdit.get_text()
-	
 	if format_selector.selected == 0:
 		format = ""
 	elif format_selector.selected == 1:
-		format = "-x " 
+		format = "--extract-audio" 
 		if audio_format_selector.selected == 0:
-			audio_format = "--audio-format aac "
+			audio_format = "--audio-format aac"
 		elif audio_format_selector.selected == 1:
 			audio_format = "--audio-format flac"
 		elif audio_format_selector.selected == 2:
@@ -47,35 +88,52 @@ func download_video():
 		elif audio_format_selector.selected == 7:
 			audio_format = "--audio-format alac"
 	
-	$DownloadSection/OtherPar/CompleteCommand.text = yt_dl_path + format + audio_format + download_directory + link
+	if url.text == "":
+		debug.text = "Paste a link to continue"
+		return
+		
+	if directory.text == "":
+		debug.text = "Paste a directory to continue"
 	
-	if $DownloadSection/ytdlpPath/ytdlpPathLineEdit.text == "":
-		$DownloadSection/OtherPar/Debug.text = "Select the correct path to yt-dlp.exe"
 	else:
-		if $DownloadSection/VideoLinkContainer/VideoLinkLineEdit.text == "":
-			$DownloadSection/OtherPar/Debug.text = "Please, add one URL!"
-		else:
-			OS.execute(yt_dl_path, [format, download_directory, link])
-			OS.shell_open($DownloadSection/DownloadPathContainer/DownloadPathLineEdit.get_text())
+		var arguments = ["--paths", '"' + directory.text + '"', '"' + url.text + '"']
+		if audio_format:
+			arguments.append('"' + format + '"')
+			if audio_format_selector:
+				arguments.append('"' + audio_format + '"')
+		debug.text = PoolStringArray(arguments).join(" ")
+		OS.execute("yt-dlp", arguments, true)
+		clear_field()
+		OS.shell_open(directory.text)
 
-func _on_VideoLinkButton_pressed():
-	$DownloadSection/VideoLinkContainer/VideoLinkLineEdit.text = OS.clipboard
+func clear_field():
+#	directory.clear()
+	url.clear()
 
-func _on_DownloadPathButton_pressed():
-	$DownloadDialogSelectFolder.show()
-	
-func _on_ytdlpPathButton_pressed():
-	$ytdlpDialogOpenFile.show()
+#func _on_LinkButton_pressed():
+#	url.text = OS.clipboard
 
 func _on_StartDownload_pressed():
 	download_video()
 
-func _on_DownloadDialogSelectFolder_folder_selected(folder):
-	$DownloadSection/DownloadPathContainer/DownloadPathLineEdit.text = folder
+func _on_DirectoryButton_pressed() -> void:
+	get_node("Node/SelectFolder").show()
 
-func _on_ytdlpDialogOpenFile_files_selected(files):
-	var path = files[0]
-	$DownloadSection/ytdlpPath/ytdlpPathLineEdit.text = path
-	Global.yt_dl_dir = path
+func _on_SelectFolder_folder_selected(folder: String) -> void:
+	if !folder:
+		return
+	directory.text = folder
+	Data.directory = folder
+	save_config()
 
-		
+func _on_DirectoryText_text_changed(new_text: String) -> void:
+	Data.directory = new_text
+	save_config()
+
+func _on_FormatSelector_item_selected(index: int) -> void:
+	Data.extract_audio = index
+	save_config()
+	
+func _on_AudioFormatSelector_item_selected(index: int) -> void:
+	Data.audio_format_selector = index
+	save_config()

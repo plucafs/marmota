@@ -13,6 +13,7 @@ config_version=4
 config/name="marmota"
 config/description="A yt-dlp GUI made in Godot"
 run/main_scene="res://Main.tscn"
+run/low_processor_mode=true
 boot_splash/image="res://assets/icons/splash.png"
 config/icon="res://assets/icons/icon.png"
 config/macos_native_icon="res://assets/icons/icon.icns"
@@ -20,12 +21,12 @@ config/windows_native_icon="res://assets/icons/icon.ico"
 
 [autoload]
 
-Global="*res://scripts/Global.gd"
+Data="*res://scripts/Data.gd"
 
 [display]
 
 window/size/width=600
-window/size/height=700
+window/size/height=400
 
 [editor_plugins]
 
@@ -54,6 +55,11 @@ texture={
 "stream": false,
 "svg/scale": 1.0
 }
+
+[locale]
+
+translations=PoolStringArray( "res://translation/translation.it.translation", "res://translation/translation.en.translation" )
+locale_filter=[ 0, [  ] ]
 
 [physics]
 
