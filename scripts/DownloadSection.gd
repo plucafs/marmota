@@ -25,9 +25,6 @@ func _ready():
 #	name = "KEY_DOWNLOAD_SECTION"
 	if load_config():
 		save_config()
-		
-#	url.text = "https://www.youtube.com/watch?v=1s84rIhPuhk"
-#	directory.text = "/home/user/Video/"
 	
 	format_selector.add_item("Video + audio")
 	format_selector.add_item("KEY_AUDIO")
@@ -42,13 +39,13 @@ func _ready():
 	
 	format_selector.selected = Data.extract_audio
 	audio_format_selector.selected = Data.audio_format_selector
+	directory.text = Data.directory
+	
 	if format_selector.selected == 0:
 		audio_format_selector.disabled = true
 
-func _process(_delta):
-	if "youtu" in OS.clipboard:
-		url.text = OS.clipboard
 
+###
 func save_config():
 	var config = ConfigFile.new()
 	# Section, key, value
@@ -58,24 +55,33 @@ func save_config():
 	config.set_value("settings", "locale", Data.locale)
 	config.set_value("settings", "open_folder_after_download", Data.open_folder_after_download)
 	config.save("user://config.cfg")
+	print("Config saved")
 
 func load_config():
 	var config = ConfigFile.new()
 	var err = config.load("user://config.cfg")
 	if err != OK:
+		print("Save config")
 		return true
 	for section in config.get_sections():
-		directory.text = config.get_value(section, "directory")
+		Data.directory = config.get_value(section, "directory") # doesn't exist
 		Data.extract_audio = config.get_value(section, "extract_audio")
 		Data.audio_format_selector = config.get_value(section, "audio_format_selector")
 		Data.locale = config.get_value(section, "locale")
 		Data.open_folder_after_download = config.get_value(section, "open_folder_after_download")
-		
+	print("Config loaded")
+	return false
+###
+
+func _process(_delta):
+	if "youtu" in OS.clipboard:
+		url.text = OS.clipboard
+
 func download_video():
 	if format_selector.selected == 0:
 		format = ""
 	elif format_selector.selected == 1:
-		format = "--extract-audio" 
+		format = "--extract-audio"
 		if audio_format_selector.selected == 0:
 			audio_format = "--audio-format aac"
 		elif audio_format_selector.selected == 1:
@@ -115,9 +121,6 @@ func download_video():
 func clear_field():
 #	directory.clear()
 	url.clear()
-
-#func _on_LinkButton_pressed():
-#	url.text = OS.clipboard
 
 func _on_StartDownload_pressed():
 	download_video()
