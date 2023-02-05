@@ -5,11 +5,12 @@ extends Control
 #add more yt-dlp commands
 
 #Process to save configs:
-#Create value in the Data singleton
-#Add value to save_config()
-#Add value to load_config()
-#Set the value when an event occurs
-#Load the value at startup
+
+#1Create value in the Data singleton
+#2Add value to save_config()
+#3Add value to load_config()
+#4Set the value when an event occurs
+#5Load the value at startup
 
 onready var format_selector = get_node("%FormatSelector")
 onready var audio_format_selector = get_node("%AudioFormatSelector")
@@ -55,6 +56,7 @@ func save_config():
 	config.set_value("settings", "extract_audio", Data.extract_audio)
 	config.set_value("settings", "audio_format_selector", Data.audio_format_selector)
 	config.set_value("settings", "locale", Data.locale)
+	config.set_value("settings", "open_folder_after_download", Data.open_folder_after_download)
 	config.save("user://config.cfg")
 
 func load_config():
@@ -67,6 +69,7 @@ func load_config():
 		Data.extract_audio = config.get_value(section, "extract_audio")
 		Data.audio_format_selector = config.get_value(section, "audio_format_selector")
 		Data.locale = config.get_value(section, "locale")
+		Data.open_folder_after_download = config.get_value(section, "open_folder_after_download")
 		
 func download_video():
 	if format_selector.selected == 0:
@@ -106,7 +109,8 @@ func download_video():
 		debug.text = PoolStringArray(arguments).join(" ")
 		OS.execute("yt-dlp", arguments, true)
 		clear_field()
-		OS.shell_open(directory.text)
+		if Data.open_folder_after_download:
+			OS.shell_open(directory.text)
 
 func clear_field():
 #	directory.clear()

@@ -1,8 +1,8 @@
 ,en,it
-KEY_LINK_PLACEHOLDER,The link will be automatically paste,Il link verrà incollato automaticamente
+KEY_LINK_PLACEHOLDER,The link will be automatically pasted,Il link verrà incollato automaticamente
 KEY_DIRECTORY_PLACEHOLDER,Select the download directory, Seleziona la cartella di download
 KEY_DOWNLOAD, Start download, Inizia download
 KEY_AUDIO, Audio only, Solo audio
 KEY_SELECT_LANGUAGE, Select language, Seleziona lingua
 KEY_DOWNLOAD_SECTION, Download section, Sezione download
-
+KEY_OPEN_FOLDER_AFTER_DOWNLOAD, Open the directory when the download ends, Apri la cartella quando il download è concluso

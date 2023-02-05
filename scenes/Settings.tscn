@@ -22,7 +22,8 @@ __meta__ = {
 margin_left = 32.0
 margin_top = 16.0
 margin_right = 568.0
-margin_bottom = 334.0
+margin_bottom = 384.0
+custom_constants/separation = 16
 
 [node name="Languages" type="OptionButton" parent="MarginContainer/VBoxContainer"]
 margin_right = 536.0
@@ -31,4 +32,19 @@ rect_min_size = Vector2( 0, 35 )
 size_flags_horizontal = 3
 text = "KEY_SELECT_LANGUAGE"
 
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 51.0
+margin_right = 536.0
+margin_bottom = 86.0
+rect_min_size = Vector2( 0, 35 )
+
+[node name="OpenFolder" type="CheckBox" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_right = 536.0
+margin_bottom = 35.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/hseparation = 16
+text = "KEY_OPEN_FOLDER_AFTER_DOWNLOAD"
+
 [connection signal="item_selected" from="MarginContainer/VBoxContainer/Languages" to="." method="_on_Languages_item_selected"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/HBoxContainer/OpenFolder" to="." method="_on_OpenFolder_toggled"]
