@@ -41,6 +41,8 @@ func _ready():
 	
 	format_selector.selected = Data.extract_audio
 	audio_format_selector.selected = Data.audio_format_selector
+	if format_selector.selected == 0:
+		audio_format_selector.disabled = true
 
 func _process(_delta):
 	if "youtu" in OS.clipboard:
@@ -132,6 +134,10 @@ func _on_DirectoryText_text_changed(new_text: String) -> void:
 
 func _on_FormatSelector_item_selected(index: int) -> void:
 	Data.extract_audio = index
+	if index == 0:
+		audio_format_selector.disabled = true
+	if index == 1:
+		audio_format_selector.disabled = false
 	save_config()
 	
 func _on_AudioFormatSelector_item_selected(index: int) -> void:
