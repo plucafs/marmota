@@ -1,5 +1,8 @@
 extends Control
 
+# Links:
+# https://github.com/yt-dlp/yt-dlp
+
 #To do: 
 #history of links/directories
 #add more yt-dlp commands

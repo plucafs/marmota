@@ -20,10 +20,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
-tab_align = 0
 
 [node name="DownloadSection" parent="TabContainer" instance=ExtResource( 3 )]
-margin_top = 29.0
+margin_left = 1.0
+margin_top = 30.0
+margin_right = -1.0
+margin_bottom = -1.0
 
 [node name="Settings" parent="TabContainer" instance=ExtResource( 1 )]
 visible = false
