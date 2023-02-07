@@ -12,8 +12,7 @@ theme = ExtResource( 2 )
 [node name="Background" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = -91.0
-color = Color( 0.15, 0.15, 0.15, 1 )
+color = Color( 0.203922, 0.203922, 0.211765, 1 )
 
 [node name="TabContainer" type="TabContainer" parent="."]
 anchor_right = 1.0
