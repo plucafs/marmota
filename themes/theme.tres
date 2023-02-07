@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=12 format=2]
+[gd_resource type="Theme" load_steps=15 format=2]
 
 [ext_resource path="res://fonts/Roboto/Roboto-Regular.ttf" type="DynamicFontData" id=1]
 
@@ -35,7 +35,7 @@ expand_margin_top = 4.0
 expand_margin_bottom = 4.0
 
 [sub_resource type="StyleBoxFlat" id=10]
-bg_color = Color( 0.1, 0.1, 0.1, 1 )
+bg_color = Color( 0.101961, 0.101961, 0.101961, 1 )
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -49,6 +49,9 @@ expand_margin_left = 4.0
 expand_margin_right = 4.0
 expand_margin_top = 4.0
 expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxLine" id=13]
+color = Color( 0.960784, 0.364706, 0.364706, 1 )
 
 [sub_resource type="StyleBoxLine" id=11]
 color = Color( 0.901961, 0.403922, 0.403922, 1 )
@@ -79,6 +82,16 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 0.101961, 0.101961, 0.101961, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.960784, 0.364706, 0.364706, 1 )
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.176471, 0.176471, 0.188235, 1 )
 border_width_left = 1
@@ -105,6 +118,9 @@ border_color = Color( 0.96, 0.3648, 0.3648, 1 )
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 
+[sub_resource type="StyleBoxLine" id=14]
+color = Color( 0.960784, 0.364706, 0.364706, 1 )
+
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 1 )
 
@@ -118,13 +134,16 @@ Button/styles/focus = SubResource( 9 )
 Button/styles/hover = SubResource( 9 )
 Button/styles/normal = SubResource( 8 )
 Button/styles/pressed = SubResource( 10 )
+HSeparator/styles/separator = SubResource( 13 )
 Label/styles/normal = SubResource( 11 )
 LineEdit/colors/cursor_color = Color( 0.901961, 0.403922, 0.403922, 1 )
 LineEdit/colors/font_color = Color( 1, 1, 1, 1 )
 LineEdit/styles/focus = SubResource( 7 )
 LineEdit/styles/normal = SubResource( 3 )
 OptionButton/constants/arrow_margin = 8
+PopupMenu/styles/panel = SubResource( 12 )
 TabContainer/colors/font_color_bg = Color( 0.301961, 0.294118, 0.294118, 1 )
 TabContainer/styles/panel = SubResource( 4 )
 TabContainer/styles/tab_bg = SubResource( 5 )
 TabContainer/styles/tab_fg = SubResource( 6 )
+VSeparator/styles/separator = SubResource( 14 )

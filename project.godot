@@ -30,7 +30,7 @@ window/size/height=400
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/native_dialogs/plugin.cfg" )
+enabled=PoolStringArray(  )
 
 [importer_defaults]
 
